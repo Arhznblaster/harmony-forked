@@ -68,12 +68,12 @@ class Harmony:
     def __init__(self, bot, host_platform, host_platform_obj):
         self.__host = bot
         self.__host_platform = host_platform
-        self.__host_public = Host(self.__host, host_platform)
+        self.__host_public = Host(self.__host, host_platform) # type: ignore
         self.__data = AutoSaveDict() # this should be kept private to prevent tampering
         self.__platforms = Platforms()
 
         # add host platform
-        self.__platforms.add_platform(self.__host_platform, host_platform_obj)
+        self.__platforms.add_platform(self.__host_platform, host_platform_obj) # type: ignore
 
     @property
     def platforms(self):
@@ -87,8 +87,8 @@ class Harmony:
     def host_platform(self):
         return self.__host_platform
 
-    async def _send_bridge_platform(self, target, platform, content, user: User = None,
-                                    specials: MessageFeatures = None):
+    async def _send_bridge_platform(self, target, platform, content, user: User = None, # type: ignore
+                                    specials: MessageFeatures = None): # type: ignore
         if not platform in self.__platforms.enabled:
             raise ValueError(f"platform {platform} is not enabled")
 
@@ -135,14 +135,14 @@ class Harmony:
 
         return results
 
-    async def _send_bot_platform(self, target, platform, content, specials: MessageFeatures = None):
+    async def _send_bot_platform(self, target, platform, content, specials: MessageFeatures = None): # type: ignore
         if not platform in self.__platforms.enabled:
             raise ValueError(f"platform {platform} is not enabled")
 
         support = self.__platforms.get_platform(platform)
         await support.send(target, content, specials)
 
-    async def send_bridge(self, target, content, user: User = None, specials: MessageFeatures = None):
+    async def send_bridge(self, target, content, user: User = None, specials: MessageFeatures = None): # type: ignore
         """Send a message to the room associated with the channel."""
         content = str(content)
 
