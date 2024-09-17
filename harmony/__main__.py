@@ -1,3 +1,5 @@
+# this is not the main repo, this is used for things i add. the main repo is: UnifierHQ/harmony
+
 import room
 from host import Host
 import ujson as json
